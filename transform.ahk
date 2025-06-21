@@ -1,45 +1,62 @@
-i := 50 ; Movement/resizing increment in pixels
+$#Right::window.move('R')
+$#Left::window.move('L')
+$#Up::window.move('U')
+$#Down::window.move('D')
 
-; Move Window: Win + Arrow Keys
+$^#Right::window.resize('R')
+$^#Left::window.resize('L')
+$^#Up::window.resize('U')
+$^#Down::window.resize('D')
 
-#Right:: {
-    WinGetPos(&x, &y, , , "A")
-    WinMove(x + i, y, , , "A")
-}
+$#WheelUp::window.unit_update(1)
+$#WheelDown::window.unit_update(-1)
+$#MButton::window.unit_reset()
 
-#Left:: {
-    WinGetPos(&x, &y, , , "A")
-    WinMove(x - i, y, , , "A")
-}
+class window {
+    static DEFAULT_UNITS := 50
+    static UNITS_INCREMENT_INTERVAL := 10
+    static current_units := this.DEFAULT_UNITS
 
-#Up:: {
-    WinGetPos(&x, &y, , , "A")
-    WinMove(x, y - i, , , "A")
-}
+    static unit_update(sign) {
+        local last_units := this.current_units
+        local increment := this.UNITS_INCREMENT_INTERVAL * sign
+        local new := this.current_units + increment
+        this.current_units := Max(0, new)
+        if (last_units != this.current_units) {
+            this.notify()
+        }
+    }
+    
+    static unit_reset() {
+        this.current_units := this.DEFAULT_UNITS
+        this.notify()
+    }
 
-#Down:: {
-    WinGetPos(&x, &y, , , "A")
-    WinMove(x, y + i, , , "A")
-}
+    static move(direction) => this.re_mo('move', direction)
+    static resize(direction) => this.re_mo('resize', direction)
 
-; Resize Window: Ctrl + Win + Arrow Keys
+    static re_mo(type, direction) {
+        direction := SubStr(direction, 1, 1)
+        id := 'ahk_id ' WinActive('A')
+        WinGetPos(&x, &y, &w, &h, id)
+        if (type = 'resize')
+            switch direction {
+                case 'R': w += this.current_units
+                case 'L': w -= this.current_units
+                case 'U': h -= this.current_units
+                case 'D': h += this.current_units
+            }
+        else if (type = 'move')
+            switch direction {
+                case 'R': x += this.current_units
+                case 'L': x -= this.current_units
+                case 'U': y -= this.current_units
+                case 'D': y += this.current_units
+            }
+        WinMove(x, y, w, h, id)
+    }
 
-^#Right:: {
-    WinGetPos(&x, &y, &w, &h, "A")
-    WinMove( , , w + i, h, "A")
-}
-
-^#Left:: {
-    WinGetPos(&x, &y, &w, &h, "A")
-    WinMove( , , w - i, h, "A")
-}
-
-^#Down:: {
-    WinGetPos(&x, &y, &w, &h, "A")
-    WinMove( , , w, h + i, "A")
-}
-
-^#Up:: {
-    WinGetPos(&x, &y, &w, &h, "A")
-    WinMove( , , w, h - i, "A")
+    static notify() =>
+        ToolTip('unit increment set to: ' this.current_units) 
+        . SetTimer((*) => ToolTip(), -1000)
 }
