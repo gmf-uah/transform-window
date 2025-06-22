@@ -1,3 +1,6 @@
+; Show a tray notification when the script starts
+TrayTip "transform-window", "Script running successfully", 16
+
 $#Right::window.move('R')
 $#Left::window.move('L')
 $#Up::window.move('U')
