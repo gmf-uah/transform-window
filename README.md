@@ -13,4 +13,4 @@ To activate:
 
    Ensure AutoHotkey is installed before attempting to run the script.
 
-[![Download Script](https://img.shields.io/badge/Text-transform.ahk-brightblue?style=for-the-badge)](https://raw.githubusercontent.com/gmf-uah/transform-window/main/transform.ahk)
+[![Download Script](https://img.shields.io/badge/Text-transform.ahk-blue?style=for-the-badge)](https://raw.githubusercontent.com/gmf-uah/transform-window/main/transform.ahk)
