@@ -3,7 +3,7 @@ This is an AutoHotkey script that grants the user freedom to move and resize the
 
 To activate:
 
-1. Right click the green button link below to open the context menu.
+1. Right click the blue button link below to open the context menu.
 
 2. Select "Save Link As ..." in the menu to download the script.
 
@@ -13,4 +13,4 @@ To activate:
 
    Ensure AutoHotkey is installed before attempting to run the script.
 
-[![Download Script](https://img.shields.io/badge/Text-transform.ahk-brightgreen?style=for-the-badge)](https://raw.githubusercontent.com/gmf-uah/transform-window/main/transform.ahk)
+[![Download Script](https://img.shields.io/badge/Text-transform.ahk-brightblue?style=for-the-badge)](https://raw.githubusercontent.com/gmf-uah/transform-window/main/transform.ahk)
