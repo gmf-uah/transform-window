@@ -1,7 +1,7 @@
 # transform-window
 AutoHotkey script that grants the user freedom to move and resize the current active window using keyboard shortcuts.
 
-To open:
+To run the script:
 
 1. Right click the green button link below.
 
