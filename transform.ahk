@@ -10,6 +10,14 @@ $^#Left::window.resize('L')
 $^#Up::window.resize('U')
 $^#Down::window.resize('D')
 
+$#]::window.unit_update(1)       ; Win + ] to increase increment
+$#[::window.unit_update(-1)      ; Win + [ to decrease increment
+$#\::window.unit_reset()         ; Win + Backslash to reset increment
+
+$#NumpadAdd::window.unit_update(1)  ; Win + Numpad + to increase increment
+$#NumpadSub::window.unit_update(-1) ; Win + Numpad - to decrease increment
+$#NumpadEnter::window.unit_reset()  ; Win + Numpad Enter to reset increment
+
 $#WheelUp::window.unit_update(1)
 $#WheelDown::window.unit_update(-1)
 $#MButton::window.unit_reset()
